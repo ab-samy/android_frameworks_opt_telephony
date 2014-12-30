@@ -1630,7 +1630,7 @@ public class SIMRecords extends IccRecords {
     @Override
     public int getDisplayRule(String plmn) {
         int rule;
-        if (mContext != null && mContext.getResources().getBoolean(
+        if ((mContext != null) && mContext.getResources().getBoolean(
                 com.android.internal.R.bool.def_telephony_spn_spec_enabled)) {
             rule = SPN_RULE_SHOW_SPN;
             return rule;
@@ -1935,11 +1935,4 @@ public class SIMRecords extends IccRecords {
         pw.flush();
     }
 
-    private void setSystemProperty(String key, String val) {
-        // Update the system properties only in case NON-DSDS.
-        // TODO: Shall have a better approach!
-        if (!TelephonyManager.getDefault().isMultiSimEnabled()) {
-            SystemProperties.set(key, val);
-        }
-    }
 }
